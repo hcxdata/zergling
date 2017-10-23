@@ -18,8 +18,8 @@ NEWSPIDER_MODULE = 'zergling.spiders'
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
 # Ensure all spiders share same duplicates filter through redis.
-# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-DUPEFILTER_CLASS = "zergling.bloom_filter.BloomFilter"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# DUPEFILTER_CLASS = "zergling.bloom_filter.BloomFilter"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'zergling (+http://www.yourdomain.com)'
@@ -30,11 +30,18 @@ USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 
 ROBOTSTXT_OBEY = False
 
 # redis config
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
+# REDIS_HOST = '47.94.99.68'
+# REDIS_PORT = 6380
 # REDIS_DB = 
 # REDIS_BLOCKNUM = 
-REDIS_KEY = 'jetyun'
+REDIS_URL = 'redis://:KXqHevdbQC4WPp@47.94.99.68:6380'
+# REDIS_KEY = 'jetyun'
+
+
+# mongodb config
+MONGO_URI = 'mongodb://root:KXqHevdbQC4WPp@47.94.99.68:3717'
+MONGO_DATABASE = 'admin'
+COLLECTION_NAME = 'zergling'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -79,9 +86,9 @@ REDIS_KEY = 'jetyun'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'zergling.pipelines.ZerglingPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'zergling.pipelines.ZerglingPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
