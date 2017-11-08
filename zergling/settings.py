@@ -18,8 +18,8 @@ NEWSPIDER_MODULE = 'zergling.spiders'
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
 # Ensure all spiders share same duplicates filter through redis.
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-# DUPEFILTER_CLASS = "zergling.bloom_filter.BloomFilter"
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+DUPEFILTER_CLASS = "zergling.bloom_filter.BloomFilter"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'zergling (+http://www.yourdomain.com)'

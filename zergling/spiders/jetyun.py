@@ -39,9 +39,14 @@ class JetyunSpider(RedisCrawlSpider):
         article = g.extract(raw_html=response.body)
         item = ZerglingItem()
         infos = article.infos
-        item["website_name"] = self.config_json["website_name"]
-        if self.config_json["column_name"]:
-            item["column_name"] = self.config_json["column_name"]
+        # item["website_name"] = self.config_json["website_name"]
+        # if self.config_json["column_name"]:
+        #     item["column_name"] = self.config_json["column_name"]
+        for k in self.config_json:
+            if k != "collections" and k != "start_url" and k != "extracts" and k != "follows":
+                item[k] = self.config_json[k]
+        item["platform"] = 1
+        item["url"] = response.url.encode('utf-8')
         collections = self.config_json["collections"]
         for c in collections:
             name = str(c["name"])
@@ -53,7 +58,7 @@ class JetyunSpider(RedisCrawlSpider):
             if c.has_key("callback") and c["callback"]:
                 try:
                     exec c["callback"]
-                    ret = callback(value)
+                    ret = callback(value, item, infos)
                     if ret :
                         value = ret
                 except Exception as e:
@@ -64,6 +69,5 @@ class JetyunSpider(RedisCrawlSpider):
                 if value and len(value) >= 1 :
                     value = value[0]
             infos[name] = value
-        item["url"] = response.url.encode('utf-8')
         item["datas"] = infos
         yield item

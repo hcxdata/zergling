@@ -14,6 +14,7 @@ class ZerglingItem(scrapy.Item):
     datas = scrapy.Field()
     website_name = scrapy.Field()
     column_name = scrapy.Field()
+    platform = scrapy.Field()
     url = scrapy.Field()
 
     # def __init__(self, collection):
