@@ -16,6 +16,7 @@ class ZerglingItem(scrapy.Item):
     column_name = scrapy.Field()
     platform = scrapy.Field()
     url = scrapy.Field()
+    crawled_at = scrapy.Field()
 
     # def __init__(self, collection):
     #     print collection, "||||||||||||||"

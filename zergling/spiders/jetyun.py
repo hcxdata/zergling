@@ -11,6 +11,7 @@ from goose.text import StopWordsChinese
 from ..items import ZerglingItem
 from lxml import etree
 import json
+import time
 
 class JetyunSpider(RedisCrawlSpider):
     name = 'jetyun'
@@ -70,4 +71,5 @@ class JetyunSpider(RedisCrawlSpider):
                     value = value[0]
             infos[name] = value
         item["datas"] = infos
+        item["crawled_at"] = int(time.time())
         yield item

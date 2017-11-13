@@ -84,6 +84,10 @@ COLLECTION_NAME = 'zergling'
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
+EXTENSIONS = {
+   'zergling.storestats.StoreStats': 0,
+}
+
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
