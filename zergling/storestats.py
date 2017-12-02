@@ -48,11 +48,11 @@ class StoreStats(object):
         self.task.start(self.interval)
 
     def item_scraped(self, item, spider):
-        if spider.config_json["website_name"] not in self.itemcollector.item_stats :
+        if item["website_name"] not in self.itemcollector.item_stats :
             self.itemcollector.new_stats()
-            self.itemcollector.set_item_stats(spider.config_json["website_name"], self.itemcollector.get_stats())
+            self.itemcollector.set_item_stats(item["website_name"], self.itemcollector.get_stats())
         else:
-            self.itemcollector.set_stats(self.itemcollector.item_stats[spider.config_json["website_name"]])
+            self.itemcollector.set_stats(self.itemcollector.item_stats[item["website_name"]])
         self.itemcollector.inc_value(str(datetime.datetime.now().strftime("%Y.%m.%d")), spider=spider)
 
     def store(self, spider):
@@ -70,7 +70,7 @@ class StoreStats(object):
                         update_inc = update.setdefault("$inc", {})
                         update_inc[field+"i"] = item_stats_copy[stat][p]
                     if update:
-                        self.db[self.collection_name].update({"website_name" : spider.config_json["website_name"]}, update, upsert=True)
+                        self.db[self.collection_name].update({"website_name" : stat}, update, upsert=True)
 
     def spider_closed(self, spider, reason):
         # self.client.close()

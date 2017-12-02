@@ -73,8 +73,6 @@ class BloomFilter(RFPDupeFilter):
 
     def request_seen(self, request):
         if self.isContains(request.url): 
-            print "url exit"
             return True
         else:
-            print "url not exit"
             self.insert(request.url)
